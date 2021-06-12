@@ -30,6 +30,11 @@ config/name="RotatoWalker"
 run/main_scene="res://objects/game/Game.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=960
+window/size/height=720
+
 [input]
 
 player_left={
