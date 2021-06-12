@@ -15,6 +15,7 @@ var current_anchor: Anchor
 var other_anchor: Anchor
 var rotate_direction = RotateDirection.CLOCKWISE
 var rotate_speed = PI / 2  # Rotate PI radians every X second(s)
+var pause = false
 
 onready var left_anchor = $Anchor_Left
 onready var right_anchor = $Anchor_Right
@@ -27,6 +28,7 @@ func _physics_process(delta):
 	_update_center()
 
 func _process_rotation(delta):
+	if pause: return
 	
 	if current_anchor == null or other_anchor == null:
 		return
@@ -89,17 +91,19 @@ func _leave_footprint():
 func _unhandled_key_input(event):
 	if event.is_action_pressed("player_step"):
 		_handle_player_step()
-	"""
-	if event.is_action_pressed("player_left"):
-		_handle_player_left()
-	elif event.is_action_pressed("player_right"):
-		_handle_player_right()
-	"""
+
+func play_cheer():
+	pause = true
+	$AnimationPlayer.play("cheer")
+	yield($AnimationPlayer, "animation_finished")
+	pause = false
+
 func _handle_bump(anchor: Anchor, with:Area2D):
 	if with.is_in_group("goal"):
-		emit_signal("hit_goal")
 		with.queue_free()
+		play_cheer()
 		print("We won!")
+		emit_signal("hit_goal")
 		return
 	
 	if with.is_in_group("wall"):
@@ -111,6 +115,8 @@ func _handle_bump(anchor: Anchor, with:Area2D):
 			rotate_direction = RotateDirection.COUNTER_CLOCKWISE
 		else:
 			rotate_direction = RotateDirection.CLOCKWISE
+	
+		center_position.flip_h = rotate_direction == RotateDirection.COUNTER_CLOCKWISE
 
 func _on_Anchor_Right_bumped(area):
 	_handle_bump(right_anchor, area)
