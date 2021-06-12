@@ -12,4 +12,5 @@ func refresh_time(time):
 	var minutes = int(time / 60)
 	var seconds = int(time / 1)
 	var milliseconds = int(time*1000) % 1000
-	_time.text = str(minutes) + ':' + str(seconds) + ':' + str(milliseconds)
+	var timetext = "%02d:%02d" % [minutes, seconds]
+	_time.text = timetext + '.' + str(milliseconds).left(2)

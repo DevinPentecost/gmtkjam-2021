@@ -16,6 +16,7 @@ var other_anchor: Anchor
 var rotate_direction = RotateDirection.CLOCKWISE
 var rotate_speed = PI / 2  # Rotate PI radians every X second(s)
 var pause = false
+var firststep = true
 
 onready var left_anchor = $Anchor_Left
 onready var right_anchor = $Anchor_Right
@@ -37,7 +38,14 @@ func _process_rotation(delta):
 	anchor_angle += rotate_direction * rotate_speed * delta
 	var anchor_position = current_anchor.global_position
 	var offset = Vector2.DOWN.rotated(anchor_angle) * anchor_distance
-	other_anchor.global_position = anchor_position + offset
+	var other_position = anchor_position + offset
+	other_anchor.global_position = other_position
+	
+	# set sprite direction
+	if not other_anchor.find_node("AnimatedSprite").flip_h and offset.y > 0: # need to add logic flip when counter clockwise
+		other_anchor.find_node("AnimatedSprite").flip_h = true
+	elif other_anchor.find_node("AnimatedSprite").flip_h and offset.y < 0:
+		other_anchor.find_node("AnimatedSprite").flip_h = false
 	
 func _update_center():
 	center_position.global_position = left_anchor.global_position + (right_anchor.global_position - left_anchor.global_position)/2
@@ -59,6 +67,15 @@ func switch_anchor(player_hit_left):
 		current_anchor = right_anchor
 		other_anchor = left_anchor
 	current_anchor.highlighted = true
+	
+	# update sprite animations on switch
+	if firststep:
+		firststep = false
+		current_anchor.find_node("AnimatedSprite").play("wake") # think have to add animationPlayer to queue up walk animation after
+		other_anchor.find_node("AnimatedSprite").play("wake")
+	else:
+		current_anchor.find_node("AnimatedSprite").play("inactive")
+		other_anchor.find_node("AnimatedSprite").play("walk")
 	
 	anchor_angle = other_anchor.global_position.angle_to_point(current_anchor.global_position) - PI/2
 	
@@ -96,6 +113,7 @@ func play_cheer():
 	pause = true
 	$AnimationPlayer.play("cheer")
 	yield($AnimationPlayer, "animation_finished")
+	other_anchor.find_node("AnimatedSprite").play("walk")
 	pause = false
 
 func _handle_bump(anchor: Anchor, with:Area2D):
@@ -104,6 +122,7 @@ func _handle_bump(anchor: Anchor, with:Area2D):
 		play_cheer()
 		print("We won!")
 		emit_signal("hit_goal")
+		other_anchor.find_node("AnimatedSprite").play("activate")
 		return
 	
 	if with.is_in_group("wall"):

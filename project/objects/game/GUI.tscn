@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/game/GUI.gd" type="Script" id=1]
+[ext_resource path="res://objects/game/gamefont.tres" type="DynamicFont" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 0.92549, 0.152941, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.760784, 0.764706, 0.780392, 1 )
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -12,28 +19,35 @@ __meta__ = {
 }
 
 [node name="BonkCounter" type="RichTextLabel" parent="HBoxContainer"]
-margin_right = 100.0
+margin_right = 200.0
 margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
+rect_min_size = Vector2( 200, 100 )
+custom_fonts/normal_font = ExtResource( 2 )
 text = "Bonks: 0"
 fit_content_height = true
 
 [node name="StepCounter" type="RichTextLabel" parent="HBoxContainer"]
-margin_left = 104.0
-margin_right = 204.0
+margin_left = 204.0
+margin_right = 304.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
+custom_fonts/normal_font = ExtResource( 2 )
 text = "Steps: 0"
 fit_content_height = true
 
 [node name="Progress" type="ProgressBar" parent="HBoxContainer"]
-margin_left = 208.0
-margin_right = 308.0
-margin_bottom = 14.0
+margin_left = 308.0
+margin_right = 408.0
+margin_bottom = 35.0
 rect_min_size = Vector2( 100, 0 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.113725, 0.168627, 0.32549, 1 )
 
 [node name="Time" type="RichTextLabel" parent="HBoxContainer"]
-margin_left = 312.0
-margin_right = 512.0
+margin_left = 412.0
+margin_right = 612.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 200, 0 )
+custom_fonts/normal_font = ExtResource( 2 )
