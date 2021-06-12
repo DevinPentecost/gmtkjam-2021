@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "Anchor",
 "language": "GDScript",
 "path": "res://objects/player/Anchor.gd"
+}, {
+"base": "Node2D",
+"class": "Walker",
+"language": "GDScript",
+"path": "res://objects/player/Walker.gd"
 } ]
 _global_script_class_icons={
-"Anchor": ""
+"Anchor": "",
+"Walker": ""
 }
 
 [application]

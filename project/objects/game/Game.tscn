@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://objects/player/Walker.tscn" type="PackedScene" id=1]
-[ext_resource path="res://objects/game/Goal.tscn" type="PackedScene" id=2]
-[ext_resource path="res://objects/game/Wall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/level/Goal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/level/Wall.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/game/WalkerCam.tscn" type="PackedScene" id=4]
 
 [node name="Game" type="Node2D"]
+
+[node name="WalkerCam" parent="." instance=ExtResource( 4 )]
+position = Vector2( -431.773, -215.887 )
+current = true
 
 [node name="Walker" parent="." instance=ExtResource( 1 )]
 position = Vector2( 35.483, 24.0897 )

@@ -1,4 +1,5 @@
 extends Node2D
+class_name Walker
 signal hit_goal
 signal hit_wall
 
@@ -15,11 +16,13 @@ var rotate_speed = PI / 2  # Rotate PI radians every X second(s)
 
 onready var left_anchor = $Anchor_Left
 onready var right_anchor = $Anchor_Right
+onready var center_position = $CenterPosition
 onready var anchor_distance = right_anchor.global_position.distance_to(left_anchor.global_position)
 onready var anchor_angle: float
 
 func _physics_process(delta):
 	_process_rotation(delta)
+	_update_center()
 
 func _process_rotation(delta):
 	
@@ -32,6 +35,8 @@ func _process_rotation(delta):
 	var offset = Vector2.DOWN.rotated(anchor_angle) * anchor_distance
 	other_anchor.global_position = anchor_position + offset
 	
+func _update_center():
+	center_position.global_position = left_anchor.global_position + (right_anchor.global_position - left_anchor.global_position)/2
 
 func switch_anchor(player_hit_left: bool):
 	#If no current anchor, go the direction hit
