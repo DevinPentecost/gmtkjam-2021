@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+func _ready():
+	$CPUParticles2D.emitting = true
+"
+
+[node name="Footprint" type="Sprite"]
+self_modulate = Color( 0.894118, 0.141176, 1, 0.109804 )
+texture = ExtResource( 1 )
+script = SubResource( 1 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 10
+one_shot = true
+explosiveness = 1.0
+lifetime_randomness = 0.5
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 25.0
+angular_velocity_random = 1.0
+color = Color( 1, 1, 1, 0.611765 )
