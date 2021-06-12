@@ -2,7 +2,9 @@ extends Node2D
 class_name Walker
 signal hit_goal
 signal hit_wall
+signal step
 
+const FootprintScene = preload("res://objects/player/Footprint.tscn")
 
 enum RotateDirection {
 	CLOCKWISE=1,
@@ -13,6 +15,7 @@ var current_anchor: Anchor
 var other_anchor: Anchor
 var rotate_direction = RotateDirection.CLOCKWISE
 var rotate_speed = PI / 2  # Rotate PI radians every X second(s)
+var pause = false
 
 onready var left_anchor = $Anchor_Left
 onready var right_anchor = $Anchor_Right
@@ -25,6 +28,7 @@ func _physics_process(delta):
 	_update_center()
 
 func _process_rotation(delta):
+	if pause: return
 	
 	if current_anchor == null or other_anchor == null:
 		return
@@ -38,7 +42,7 @@ func _process_rotation(delta):
 func _update_center():
 	center_position.global_position = left_anchor.global_position + (right_anchor.global_position - left_anchor.global_position)/2
 
-func switch_anchor(player_hit_left: bool):
+func switch_anchor(player_hit_left):
 	#If no current anchor, go the direction hit
 	if current_anchor == null:
 		if player_hit_left:
@@ -59,28 +63,47 @@ func switch_anchor(player_hit_left: bool):
 	anchor_angle = other_anchor.global_position.angle_to_point(current_anchor.global_position) - PI/2
 	
 	#Which way to rotate
-	if player_hit_left:
-		rotate_direction = RotateDirection.COUNTER_CLOCKWISE
-	else:
-		rotate_direction = RotateDirection.CLOCKWISE
+	if player_hit_left != null:
+		if player_hit_left:
+			rotate_direction = RotateDirection.COUNTER_CLOCKWISE
+		else:
+			rotate_direction = RotateDirection.CLOCKWISE
+	
+	_leave_footprint()
 
 func _handle_player_left():
+	emit_signal("step")
 	switch_anchor(true)
 	
 func _handle_player_right():
+	emit_signal("step")
 	switch_anchor(false)
 
-	
+func _handle_player_step():
+	emit_signal("step")
+	switch_anchor(null)
+
+func _leave_footprint():
+	var footprint = FootprintScene.instance()
+	footprint.global_position = current_anchor.global_position
+	get_parent().add_child(footprint)
+
 func _unhandled_key_input(event):
-	if event.is_action_pressed("player_left"):
-		_handle_player_left()
-	elif event.is_action_pressed("player_right"):
-		_handle_player_right()
+	if event.is_action_pressed("player_step"):
+		_handle_player_step()
+
+func play_cheer():
+	pause = true
+	$AnimationPlayer.play("cheer")
+	yield($AnimationPlayer, "animation_finished")
+	pause = false
 
 func _handle_bump(anchor: Anchor, with:Area2D):
 	if with.is_in_group("goal"):
-		emit_signal("hit_goal")
+		with.queue_free()
+		play_cheer()
 		print("We won!")
+		emit_signal("hit_goal")
 		return
 	
 	if with.is_in_group("wall"):
@@ -92,6 +115,8 @@ func _handle_bump(anchor: Anchor, with:Area2D):
 			rotate_direction = RotateDirection.COUNTER_CLOCKWISE
 		else:
 			rotate_direction = RotateDirection.CLOCKWISE
+	
+		center_position.flip_h = rotate_direction == RotateDirection.COUNTER_CLOCKWISE
 
 func _on_Anchor_Right_bumped(area):
 	_handle_bump(right_anchor, area)
