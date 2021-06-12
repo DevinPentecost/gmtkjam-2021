@@ -1,4 +1,7 @@
 extends Node2D
+signal hit_goal
+signal hit_wall
+
 
 enum RotateDirection {
 	CLOCKWISE=1,
@@ -69,13 +72,23 @@ func _unhandled_key_input(event):
 	elif event.is_action_pressed("player_right"):
 		_handle_player_right()
 
-func _handle_bump():
-	if rotate_direction == RotateDirection.CLOCKWISE:
-		rotate_direction = RotateDirection.COUNTER_CLOCKWISE
-	else:
-		rotate_direction = RotateDirection.CLOCKWISE
+func _handle_bump(anchor: Anchor, with:Area2D):
+	if with.is_in_group("goal"):
+		emit_signal("hit_goal")
+		print("We won!")
+		return
+	
+	if with.is_in_group("wall"):
+		#The pivot anchor shouldn't bump but check just in case
+		if anchor == current_anchor:
+			return
+		emit_signal("hit_wall")
+		if rotate_direction == RotateDirection.CLOCKWISE:
+			rotate_direction = RotateDirection.COUNTER_CLOCKWISE
+		else:
+			rotate_direction = RotateDirection.CLOCKWISE
 
-func _on_Anchor_Right_bumped():
-	_handle_bump()
-func _on_Anchor_Left_bumped():
-	_handle_bump()
+func _on_Anchor_Right_bumped(area):
+	_handle_bump(right_anchor, area)
+func _on_Anchor_Left_bumped(area):
+	_handle_bump(left_anchor, area)
