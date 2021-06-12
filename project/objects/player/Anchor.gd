@@ -12,6 +12,9 @@ onready var indicator = $Indicator
 func set_highlighted(_highlighted:bool):
 	highlighted = _highlighted
 	_refresh_color()
+	
+	if highlighted:
+		$AudioStreamPlayer.play()
 
 func _refresh_color():
 	var target_color = dull_color

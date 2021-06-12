@@ -44,4 +44,6 @@ initial_velocity_random = 0.25
 linear_accel = -0.1
 linear_accel_random = 0.5
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
 [connection signal="area_entered" from="." to="." method="_on_Anchor_area_entered"]

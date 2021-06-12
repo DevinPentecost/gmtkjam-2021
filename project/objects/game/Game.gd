@@ -14,7 +14,8 @@ func _process(delta):
 	gui.refresh_time(time)
 
 func get_current_targets():
-	return get_tree().get_nodes_in_group("goal").size()
+	var goals = get_tree().get_nodes_in_group("goal")
+	return goals.size()
 
 func _on_Walker_hit_goal():
 	progress = (total_targets-get_current_targets())/total_targets

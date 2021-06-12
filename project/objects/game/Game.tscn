@@ -20,6 +20,12 @@ position = Vector2( 35.483, 24.0897 )
 [node name="Goal" parent="." instance=ExtResource( 2 )]
 position = Vector2( 128.853, 122.61 )
 
+[node name="Goal2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 313.2, 82.3504 )
+
+[node name="Goal3" parent="." instance=ExtResource( 2 )]
+position = Vector2( -78.8017, -68.0934 )
+
 [node name="Node2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 132.537, -43.3056 )
 
