@@ -79,4 +79,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="WINNER!" type="RichTextLabel" parent="HBoxContainer"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -414.566
+margin_top = -429.346
+margin_right = 85.4344
+margin_bottom = -329.346
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 3.77329, 3.77329 )
+custom_fonts/normal_font = ExtResource( 2 )
+text = "YOU DID IT!!"
+fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Node" type="Node" parent="."]

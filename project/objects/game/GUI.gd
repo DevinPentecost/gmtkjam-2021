@@ -14,3 +14,7 @@ func refresh_time(time):
 	var milliseconds = int(time*1000) % 1000
 	var timetext = "%02d:%02d" % [minutes, seconds]
 	_time.text = timetext + '.' + str(milliseconds).left(2)
+
+
+func _on_Game_game_complete():
+	$"HBoxContainer/WINNER!".visible = true
