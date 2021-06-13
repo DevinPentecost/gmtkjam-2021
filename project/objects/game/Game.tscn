@@ -37,7 +37,7 @@ position = Vector2( 132.537, -43.3056 )
 [node name="background" type="Sprite" parent="."]
 position = Vector2( 115.88, 55.5591 )
 scale = Vector2( 0.4, 0.4 )
-z_index = -1
+z_index = -5
 texture = ExtResource( 7 )
 
 [node name="Music" type="AudioStreamPlayer" parent="."]

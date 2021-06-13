@@ -1,18 +1,23 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://objects/game/GUI.gd" type="Script" id=1]
 [ext_resource path="res://objects/game/gamefont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://objects/game/Atkinson-Hyperlegible-Bold-102.otf" type="DynamicFontData" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0.92549, 0.152941, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.760784, 0.764706, 0.780392, 0 )
+bg_color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 72
+font_data = ExtResource( 3 )
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="Control" parent="."]
 anchor_right = 1.0
 margin_left = 1.18909
 margin_top = 619.577
@@ -23,35 +28,55 @@ __meta__ = {
 }
 
 [node name="BonkCounter" type="RichTextLabel" parent="HBoxContainer"]
-margin_right = 200.0
-margin_bottom = 100.0
+margin_left = 650.339
+margin_top = -11.0
+margin_right = 865.339
+margin_bottom = 89.0
 rect_min_size = Vector2( 200, 100 )
 custom_fonts/normal_font = ExtResource( 2 )
 text = "Bonks: 0"
 fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="StepCounter" type="RichTextLabel" parent="HBoxContainer"]
-margin_left = 204.0
-margin_right = 304.0
-margin_bottom = 100.0
+margin_left = 652.339
+margin_top = 47.0
+margin_right = 861.339
+margin_bottom = 147.0
 rect_min_size = Vector2( 100, 100 )
 custom_fonts/normal_font = ExtResource( 2 )
 text = "Steps: 0"
 fit_content_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Progress" type="ProgressBar" parent="HBoxContainer"]
-margin_left = 308.0
-margin_right = 408.0
-margin_bottom = 35.0
+margin_left = 313.339
+margin_top = 49.0
+margin_right = 629.339
+margin_bottom = 84.0
 rect_min_size = Vector2( 100, 0 )
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Time" type="RichTextLabel" parent="HBoxContainer"]
-margin_left = 412.0
-margin_right = 612.0
-margin_bottom = 100.0
+margin_left = 308.339
+margin_top = -19.0
+margin_right = 664.339
+margin_bottom = 66.0
 rect_min_size = Vector2( 200, 0 )
-custom_fonts/normal_font = ExtResource( 2 )
+custom_fonts/normal_font = SubResource( 3 )
+text = "00:00.00"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node" type="Node" parent="."]

@@ -108,7 +108,7 @@ animations = [ {
 "anchor",
 ]]
 script = ExtResource( 3 )
-highlight_color = Color( 1, 1, 1, 1 )
+highlight_color = Color( 0.760784, 0.760784, 0.760784, 0.94902 )
 dull_color = Color( 0.94902, 0.94902, 0.94902, 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -121,6 +121,7 @@ animation = "wake"
 
 [node name="Indicator" type="Sprite" parent="."]
 visible = false
+modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -25.1151, -20.064 )
 texture = ExtResource( 4 )
 

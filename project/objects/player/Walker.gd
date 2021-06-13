@@ -41,6 +41,8 @@ func _process_rotation(delta):
 	var other_position = anchor_position + offset
 	other_anchor.global_position = other_position
 	
+	$CenterPosition/LinkSprite.rotation = anchor_angle+PI/2
+	
 	# set sprite direction
 	if not other_anchor.find_node("AnimatedSprite").flip_h and offset.y > 0: # need to add logic flip when counter clockwise
 		other_anchor.find_node("AnimatedSprite").flip_h = true
@@ -73,9 +75,11 @@ func switch_anchor(player_hit_left):
 		firststep = false
 		current_anchor.find_node("AnimatedSprite").play("wake") # think have to add animationPlayer to queue up walk animation after
 		other_anchor.find_node("AnimatedSprite").play("wake")
+		$CenterPosition/LinkSprite.play("transfer")
 	else:
 		current_anchor.find_node("AnimatedSprite").play("inactive")
 		other_anchor.find_node("AnimatedSprite").play("walk")
+		$CenterPosition/LinkSprite.flip_h = !$CenterPosition/LinkSprite.flip_h
 	
 	anchor_angle = other_anchor.global_position.angle_to_point(current_anchor.global_position) - PI/2
 	
