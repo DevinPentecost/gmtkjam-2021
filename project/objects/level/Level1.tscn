@@ -33,7 +33,7 @@ position = Vector2( 369.529, -376.098 )
 position = Vector2( 2.06439, -357.071 )
 
 [node name="Goal6" parent="." instance=ExtResource( 2 )]
-position = Vector2( -203.303, -14.3721 )
+position = Vector2( -84.303, -53.3721 )
 
 [node name="Bumper" parent="." instance=ExtResource( 3 )]
 position = Vector2( -372.801, -271.304 )
@@ -72,19 +72,22 @@ position = Vector2( -267.204, 306.468 )
 position = Vector2( -146.628, 389.639 )
 
 [node name="Bumper13" parent="." instance=ExtResource( 3 )]
-position = Vector2( -117.33, 355.81 )
+position = Vector2( -110.203, 353.583 )
 
 [node name="Bumper14" parent="." instance=ExtResource( 3 )]
-position = Vector2( -112.25, 308.934 )
+position = Vector2( -95.7684, 307.598 )
 
 [node name="Bumper15" parent="." instance=ExtResource( 3 )]
-position = Vector2( -112.038, 250.054 )
+position = Vector2( -104.465, 254.508 )
 
 [node name="Bumper16" parent="." instance=ExtResource( 3 )]
-position = Vector2( -139.419, 191.661 )
+position = Vector2( -121.601, 209.034 )
 
 [node name="Bumper17" parent="." instance=ExtResource( 3 )]
-position = Vector2( -200.24, 150.713 )
+position = Vector2( -151.686, 169.422 )
+
+[node name="Bumper25" parent="." instance=ExtResource( 3 )]
+position = Vector2( -185.54, 135.122 )
 
 [node name="Bumper18" parent="." instance=ExtResource( 3 )]
 position = Vector2( 4.94559, -243.827 )
@@ -102,7 +105,7 @@ position = Vector2( 325.963, -324.347 )
 position = Vector2( 250.758, -78.5274 )
 
 [node name="Bumper23" parent="." instance=ExtResource( 3 )]
-position = Vector2( -234.146, -131.283 )
+position = Vector2( -122.146, -69.283 )
 
 [node name="Bumper24" parent="." instance=ExtResource( 3 )]
 position = Vector2( -337.412, 55.0455 )

@@ -112,7 +112,13 @@ func _leave_footprint():
 	footprint.global_position = current_anchor.global_position
 	get_parent().add_child(footprint)
 
+"""
 func _unhandled_key_input(event):
+	if event.is_action_pressed("player_step"):
+		_handle_player_step()
+"""
+
+func _unhandled_input(event):
 	if event.is_action_pressed("player_step"):
 		_handle_player_step()
 
