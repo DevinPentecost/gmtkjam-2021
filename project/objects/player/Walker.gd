@@ -75,11 +75,12 @@ func switch_anchor(player_hit_left):
 		firststep = false
 		current_anchor.find_node("AnimatedSprite").play("wake") # think have to add animationPlayer to queue up walk animation after
 		other_anchor.find_node("AnimatedSprite").play("wake")
-		$CenterPosition/LinkSprite.play("transfer")
 	else:
 		current_anchor.find_node("AnimatedSprite").play("inactive")
 		other_anchor.find_node("AnimatedSprite").play("walk")
-		$CenterPosition/LinkSprite.flip_h = !$CenterPosition/LinkSprite.flip_h
+	
+	$CenterPosition/LinkSprite.frame = 0
+	$CenterPosition/LinkSprite.play("transfer")
 	
 	anchor_angle = other_anchor.global_position.angle_to_point(current_anchor.global_position) - PI/2
 	

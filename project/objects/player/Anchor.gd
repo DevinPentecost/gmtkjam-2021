@@ -27,5 +27,8 @@ func _on_Anchor_area_entered(area):
 	emit_signal("bumped", area)
 	
 	if area.is_in_group("wall"):
+		area = area as Wall
+		area.play_bump_animation()
 		$CPUParticles2D.direction =  Vector2.RIGHT.rotated(global_position.angle_to_point(area.global_position))
 		$CPUParticles2D.emitting = true
+		
