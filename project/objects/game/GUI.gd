@@ -18,3 +18,4 @@ func refresh_time(time):
 
 func _on_Game_game_complete():
 	$"HBoxContainer/WINNER!".visible = true
+ 
