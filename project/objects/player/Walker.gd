@@ -16,6 +16,7 @@ var other_anchor: Anchor
 var rotate_direction = RotateDirection.CLOCKWISE
 var rotate_speed = PI / 2  # Rotate PI radians every X second(s)
 var pause = false
+var done = false
 var firststep = true
 
 onready var left_anchor = $Anchor_Left
@@ -30,6 +31,7 @@ func _physics_process(delta):
 
 func _process_rotation(delta):
 	if pause: return
+	if done: return
 	
 	if current_anchor == null or other_anchor == null:
 		return
@@ -73,11 +75,11 @@ func switch_anchor(player_hit_left):
 	# update sprite animations on switch
 	if firststep:
 		firststep = false
-		current_anchor.find_node("AnimatedSprite").play("wake") # think have to add animationPlayer to queue up walk animation after
-		other_anchor.find_node("AnimatedSprite").play("wake")
+		current_anchor.wake(false, true)
+		other_anchor.wake(true)
 	else:
 		current_anchor.find_node("AnimatedSprite").play("inactive")
-		other_anchor.find_node("AnimatedSprite").play("walk")
+		other_anchor.walk()
 	
 	$CenterPosition/LinkSprite.frame = 0
 	$CenterPosition/LinkSprite.play("transfer")
@@ -118,16 +120,19 @@ func play_cheer():
 	pause = true
 	$AnimationPlayer.play("cheer")
 	yield($AnimationPlayer, "animation_finished")
-	other_anchor.find_node("AnimatedSprite").play("walk")
-	pause = false
+	if not done:
+		other_anchor.find_node("AnimatedSprite").play("walk")
+		pause = false
 
 func _handle_bump(anchor: Anchor, with:Area2D):
 	if with.is_in_group("goal"):
 		with.queue_free()
+		with.remove_from_group("goal")
 		play_cheer()
 		print("We won!")
 		emit_signal("hit_goal")
-		other_anchor.find_node("AnimatedSprite").play("activate")
+		left_anchor.cheer(false)
+		right_anchor.cheer(false)
 		$GoalPlayer.play()
 		return
 	
@@ -149,3 +154,9 @@ func _on_Anchor_Right_bumped(area):
 	_handle_bump(right_anchor, area)
 func _on_Anchor_Left_bumped(area):
 	_handle_bump(left_anchor, area)
+
+
+func _on_Game_game_complete():
+	done = true
+	left_anchor.cheer(true)
+	right_anchor.cheer(true)

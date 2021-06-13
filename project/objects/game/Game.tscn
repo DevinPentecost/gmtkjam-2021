@@ -44,6 +44,7 @@ texture = ExtResource( 7 )
 stream = ExtResource( 8 )
 autoplay = true
 
+[connection signal="game_complete" from="." to="Walker" method="_on_Game_game_complete"]
 [connection signal="hit_goal" from="Walker" to="." method="_on_Walker_hit_goal"]
 [connection signal="hit_wall" from="Walker" to="." method="_on_Walker_hit_wall"]
 [connection signal="step" from="Walker" to="." method="_on_Walker_step"]

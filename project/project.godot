@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Walker",
 "language": "GDScript",
 "path": "res://objects/player/Walker.gd"
+}, {
+"base": "Area2D",
+"class": "Wall",
+"language": "GDScript",
+"path": "res://objects/level/Wall.gd"
 } ]
 _global_script_class_icons={
 "Anchor": "",
-"Walker": ""
+"Walker": "",
+"Wall": ""
 }
 
 [application]

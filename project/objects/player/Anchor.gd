@@ -9,12 +9,37 @@ export(bool) var highlighted = false setget set_highlighted
 
 onready var indicator = $Indicator
 
+var done = false
+
 func set_highlighted(_highlighted:bool):
 	highlighted = _highlighted
 	_refresh_color()
 	
 	if highlighted:
 		$AudioStreamPlayer.play()
+
+func wake(and_walk=false, and_sleep=false):
+	$AnimatedSprite.play("wake")
+	yield($AnimatedSprite, "animation_finished")
+	if and_walk:
+		$AnimatedSprite.play("walk")
+	elif and_sleep:
+		$AnimatedSprite.play("inactive")
+
+func cheer(loop:bool):
+	if loop:
+		$AnimatedSprite.play("activate_loop")
+	else:
+		var previous_animation = $AnimatedSprite.animation
+		$AnimatedSprite.play("activate")
+		yield($AnimatedSprite, "animation_finished")
+		$AnimatedSprite.play(previous_animation)
+		
+	done = loop
+
+func walk():
+	if not done:
+		$AnimatedSprite.play("walk")
 
 func _refresh_color():
 	var target_color = dull_color
