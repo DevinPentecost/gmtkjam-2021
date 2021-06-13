@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://objects/player/AnchorShape2d.tres" type="Shape2D" id=1]
 [ext_resource path="res://objects/player/charsheet.png" type="Texture" id=2]
 [ext_resource path="res://objects/player/Anchor.gd" type="Script" id=3]
 [ext_resource path="res://objects/player/indicator.png" type="Texture" id=4]
+[ext_resource path="res://objects/player/transfer.wav" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -13,22 +14,22 @@ region = Rect2( 266, 532, 266, 266 )
 [sub_resource type="AtlasTexture" id=2]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 532, 266, 266, 266 )
+region = Rect2( 266, 532, 266, 266 )
 
 [sub_resource type="AtlasTexture" id=3]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 0, 532, 266, 266 )
+region = Rect2( 266, 266, 266, 266 )
 
 [sub_resource type="AtlasTexture" id=4]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 266, 532, 266, 266 )
+region = Rect2( 532, 266, 266, 266 )
 
 [sub_resource type="AtlasTexture" id=5]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 532, 266, 266, 266 )
+region = Rect2( 0, 532, 266, 266 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
@@ -38,7 +39,7 @@ region = Rect2( 266, 532, 266, 266 )
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
 atlas = ExtResource( 2 )
-region = Rect2( 266, 266, 266, 266 )
+region = Rect2( 532, 266, 266, 266 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
@@ -77,19 +78,19 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": false,
+"name": "inactive",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
 "loop": false,
 "name": "wake",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 5 ) ],
+"frames": [ SubResource( 7 ) ],
 "loop": true,
 "name": "sleep",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ) ],
-"loop": false,
-"name": "inactive",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
@@ -98,9 +99,9 @@ animations = [ {
 "speed": 8.0
 }, {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 12 ) ],
-"loop": true,
+"loop": false,
 "name": "activate",
-"speed": 5.0
+"speed": 3.0
 } ]
 
 [node name="Anchor" type="Area2D" groups=[
@@ -138,5 +139,6 @@ linear_accel = -0.1
 linear_accel_random = 0.5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
 
 [connection signal="area_entered" from="." to="." method="_on_Anchor_area_entered"]

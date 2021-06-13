@@ -123,6 +123,7 @@ func _handle_bump(anchor: Anchor, with:Area2D):
 		print("We won!")
 		emit_signal("hit_goal")
 		other_anchor.find_node("AnimatedSprite").play("activate")
+		$GoalPlayer.play()
 		return
 	
 	if with.is_in_group("wall"):
@@ -134,6 +135,8 @@ func _handle_bump(anchor: Anchor, with:Area2D):
 			rotate_direction = RotateDirection.COUNTER_CLOCKWISE
 		else:
 			rotate_direction = RotateDirection.CLOCKWISE
+			
+		$BouncePlayer.play()
 	
 		center_position.flip_h = rotate_direction == RotateDirection.COUNTER_CLOCKWISE
 

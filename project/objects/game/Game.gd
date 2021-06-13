@@ -23,6 +23,7 @@ func _on_Walker_hit_goal():
 
 func _on_Walker_hit_wall():
 	hits += 1
+	$Bumper/AnimatedSprite.play("flex")
 	gui.refresh(hits, progress, steps)
 
 

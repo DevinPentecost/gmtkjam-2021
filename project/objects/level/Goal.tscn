@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://objects/level/battery.png" type="Texture" id=1]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -20,6 +20,5 @@ animations = [ {
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-self_modulate = Color( 0, 1, 0.227451, 1 )
-scale = Vector2( 0.195188, 0.195188 )
+scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 2 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/kouzali_loop.mp3-e93f20850b0b511867250acd2200cc3d.mp3str"
+
+[deps]
+
+source_file="res://objects/game/kouzali_loop.mp3"
+dest_files=[ "res://.import/kouzali_loop.mp3-e93f20850b0b511867250acd2200cc3d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
